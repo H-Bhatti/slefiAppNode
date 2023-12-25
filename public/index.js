@@ -18,11 +18,24 @@ if ("geolocation" in navigator) {
     console.log("GeoLocation Available");
     // if geolocation avaiable
     navigator.geolocation.getCurrentPosition((position) => {
-        console.log(position.coords);
+        // console.log(position.coords);
         // seting the coordinates for the marekr
-        marker.setLatLng([position.coords.latitude, position.coords.longitude]);
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        marker.setLatLng([lat, lon]);
         // setting the marer ad the marker location
-        map.setView([position.coords.latitude, position.coords.longitude],10);
+        map.setView([lat, lon],10);
+
+        // sending data to post in server side
+        const data = {lat, lon};
+        const options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body:JSON.stringify(data) 
+        };
+        fetch ("/api", options )
       });
     
   } else {

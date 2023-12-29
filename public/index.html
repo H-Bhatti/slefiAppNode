@@ -27,7 +27,12 @@
 
    <div id="mapID"></div>
 
-   <button id="button">Send to server</button>
+   <form id="myForm">
+    <label for="textInput">Enter text:</label>
+    <input type="text" id="textInput" placeholder="Enter your moods">
+    <button id="button" type="button" onclick="storeData()">Store Data</button>
+    </form>
+   <!-- <button id="button">Send to server</button> -->
 
     <script src="./index.js"></script>
 </body>

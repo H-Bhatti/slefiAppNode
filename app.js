@@ -1,6 +1,4 @@
 const express = require ("express")
-const fs = require ("fs");
-const { parse } = require("path");
 const app = express();
 const Datastore = require('nedb')
 // whole express library comes as a functoin
@@ -20,7 +18,6 @@ app.use(express.json({limit: "1mb"}))
 // express feature to limit the inocoming document size to 1 mb
 app.post("/api", (request, response) => {           //getting the post request with fetch in our api
     console.log("I got a request!");
-    // console.log(request.body);
     const data = request.body;
     const time = Date.now();        //getting a timestamp
     data.timeStamp = time;
@@ -32,16 +29,7 @@ app.post("/api", (request, response) => {           //getting the post request w
       time: data.timeStamp,
       latitude: data.lat,
       longitude: data.lon,
+      mood: data.inputMood
     });
 
   });
-
-//  const text =  fs.readFileSync("./logs.txt","utf-8");
-//  console.log(text)
-
-//  fs.writeFileSync("./logs.txt","Random text add to file","utf-8")
-
-// fs.appendFile('./logs.txt', "line added to file" + '\n', (err) => {
-//     if (err) throw err;
-//     console.log('Line added to the file');
-//   });

@@ -16,6 +16,11 @@ const marker = L.marker([0,0]).addTo(map);
 
 
 function doStuff(){
+
+  const inputMood = document.getElementById("textInput").value;
+  console.log(inputMood)
+
+
   // checking if geoloaction coordinates are available or not available
 if ("geolocation" in navigator) {
   console.log("GeoLocation Available");
@@ -31,7 +36,7 @@ if ("geolocation" in navigator) {
       // console.log(lat, lon);
 
       // sending data to post in server side
-      const data = {lat, lon};
+      const data = {lat, lon, inputMood};
       const options = {
         method: "POST",
         headers: {
@@ -54,7 +59,7 @@ if ("geolocation" in navigator) {
 
 // doStuff();
 
-document.getElementById("button").onclick = ()=>{doStuff()}
+document.getElementById("button").onclick= ()=>{doStuff()}
 
 
 // // checking if geoloaction coordinates are available or not available

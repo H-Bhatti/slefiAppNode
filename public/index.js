@@ -1,3 +1,10 @@
+function setup(){
+
+
+  noCanvas();
+  const video = createCapture(VIDEO);
+  video.size(320,240);
+  
 // adding map
 var map = L.map('mapID').setView([0, 0], 1);
 
@@ -20,8 +27,8 @@ function doStuff(){
 
 const inputMood = document.getElementById("textInput").value;
 // console.log(inputMood)
-
-
+video.loadPixels();
+const image64 = video.canvas.toDataURL();
   // checking if geoloaction coordinates are available or not available
 if ("geolocation" in navigator) {
   console.log("GeoLocation Available");
@@ -37,7 +44,7 @@ if ("geolocation" in navigator) {
       // console.log(lat, lon);
 
       // sending data to post in server side
-      const data = {lat, lon, inputMood};
+      const data = {lat, lon, inputMood, image64};
       const options = {
         method: "POST",
         headers: {
@@ -60,3 +67,8 @@ if ("geolocation" in navigator) {
 
 // doStuff();
 document.getElementById("button").onclick= ()=>{doStuff()};
+
+
+
+}
+

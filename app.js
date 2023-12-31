@@ -15,7 +15,8 @@ database.loadDatabase();
 
 // post
 app.use(express.json({limit: "1mb"}))   
-// express feature to limit the inocoming document size to 1 mb
+// express feature to limit the inocoming document size to 1 
+
 app.post("/api", (request, response) => {           //getting the post request with fetch in our api
     console.log("I got a request!");
     const data = request.body;
@@ -33,3 +34,16 @@ app.post("/api", (request, response) => {           //getting the post request w
     });
 
   });
+
+
+
+  app.get("/api",(request, response)=>{
+    database.find({},(err,data)=>{
+      if (err){
+        console.error(err)
+        response.end();
+      };
+      response.json(data);
+    })
+    
+  })

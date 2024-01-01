@@ -4,6 +4,10 @@ const Datastore = require('nedb')
 // whole express library comes as a functoin
 const fs = require('fs');
 
+// getting the ess and file system from node
+
+
+
 app.listen(3000, ()=>console.log("listening"))
 app.use(express.static("public"))
 // starting express local server
@@ -29,7 +33,7 @@ app.post("/api", (request, response) => {           //getting the post request w
     // write file to foler
   const imagePath = saveImage64(data.image64, data.timeStamp)
     
-
+// delete the 64 base data from the data.json efore sending it to the database
     delete data.image64
     data.imagepath = imagePath
     database.insert(data);
@@ -44,6 +48,7 @@ app.post("/api", (request, response) => {           //getting the post request w
   });
 
 
+  // sending data to alldata.js using the fetch library
 
   app.get("/api",(request, response)=>{
     database.find({},(err,data)=>{
@@ -55,6 +60,9 @@ app.post("/api", (request, response) => {           //getting the post request w
     })
     
   })
+
+  // function for making image path and return the path for storing in the database
+  // while writing the images to a new folder in public/images
 
   function saveImage64(inputStream, filename){
     // Remove the data URI prefix and obtain the base64 data

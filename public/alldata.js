@@ -3,6 +3,8 @@ async function getData(){
     const data = await response.json();
     console.log(data)
 
+    // getting data from the database through the app.js node file and displaying it in html by making new elemants
+
     for (item of data){
         const root = document.createElement("p");
         const mood = document.createElement("div");

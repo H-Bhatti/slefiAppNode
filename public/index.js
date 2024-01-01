@@ -1,6 +1,6 @@
 function setup(){
 
-
+// for video
   noCanvas();
   const video = createCapture(VIDEO);
   video.size(320,240);

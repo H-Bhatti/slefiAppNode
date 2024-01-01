@@ -8,14 +8,15 @@ async function getData(){
         const mood = document.createElement("div");
         const loc = document.createElement("div");
         const time = document.createElement("div");
-        const image64 = document.createElement("img");
+        const imageElement = document.createElement('img');
 
         mood.textContent = `mood = ${item.inputMood}`;
         loc.textContent = `Lat = ${item.lat}, lon = ${item.lon}`
         time.textContent = `Date = ${new Date(item.timeStamp).toLocaleString()}`
-        image64.src = item.image64; 
+        imageElement.src = item.imagepath;
+        imageElement.alt = 'Image from folder';
 
-        root.append(mood,loc,time, image64);
+        root.append(mood,loc,time, imageElement);
         document.body.append(root)
 
     }

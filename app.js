@@ -2,6 +2,7 @@ const express = require ("express")
 const app = express();
 const Datastore = require('nedb')
 // whole express library comes as a functoin
+const fs = require('fs');
 
 app.listen(3000, ()=>console.log("listening"))
 app.use(express.static("public"))
@@ -23,7 +24,14 @@ app.post("/api", (request, response) => {           //getting the post request w
     const time = Date.now();        //getting a timestamp
     data.timeStamp = time;
     // pushing it into thedatabase
+    // console.log(data.image64)
+
+    // write file to foler
+  const imagePath = saveImage64(data.image64, data.timeStamp)
     
+
+    delete data.image64
+    data.imagepath = imagePath
     database.insert(data);
     response.json({
       status: "success",
@@ -47,3 +55,20 @@ app.post("/api", (request, response) => {           //getting the post request w
     })
     
   })
+
+  function saveImage64(inputStream, filename){
+    // Remove the data URI prefix and obtain the base64 data
+    const data = inputStream.replace(/^data:image\/\w+;base64,/, '');
+    
+    // Convert base64 data to a buffer
+    const buffer = Buffer.from(data, 'base64');
+   // Save the buffer to a file
+   fs.writeFile(`./public/images/${filename}.png`, buffer, (err) => {
+     if (err) {
+         console.error('Error saving image:', err);
+     } else {
+         console.log('Image saved successfully:', `./public/images/${filename}.png`);
+     }
+ });
+ return (`./images/${filename}.png`)
+  }

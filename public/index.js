@@ -45,12 +45,13 @@ if ("geolocation" in navigator) {
 
       // sending data to post in server side
       const data = {lat, lon, inputMood, image64};
+      
       const options = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body:JSON.stringify(data) 
+        body:JSON.stringify(data)
       };
       const responseFetch = await fetch ("/api", options )
       const dataJson = await responseFetch.json();
